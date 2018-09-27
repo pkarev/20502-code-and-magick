@@ -54,6 +54,8 @@ function renderSimilarWizards() {
 }
 
 var setup = document.querySelector('.setup');
+var setupInitialX;
+var setupInitialY;
 var setupOpen = document.querySelector('.setup-open');
 var setupClose = setup.querySelector('.setup-close');
 var setupName = setup.querySelector('.setup-user-name');
@@ -88,12 +90,16 @@ setupClose.addEventListener('keydown', function (evt) {
 
 function openSetup() {
   setup.classList.remove('hidden');
+  setupInitialX = setup.offsetLeft;
+  setupInitialY = setup.offsetTop;
   document.addEventListener('keydown', onSetupEscPress);
 }
 
 function closeSetup() {
   setup.classList.add('hidden');
   document.removeEventListener('keydown', onSetupEscPress);
+  setup.style.left = setupInitialX + 'px';
+  setup.style.top = setupInitialY + 'px';
 }
 
 function onSetupEscPress(evt) {
