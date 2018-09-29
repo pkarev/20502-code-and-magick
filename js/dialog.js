@@ -95,5 +95,7 @@
     setup.style.left = setupInitialX + 'px';
     setup.style.top = setupInitialY + 'px';
   }
+
+  window.closeSetup = closeSetup;
 })();
 
