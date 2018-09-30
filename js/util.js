@@ -3,12 +3,14 @@
 (function () {
   var ENTER_KEYCODE = 13;
   var ESC_KEYCODE = 27;
+  var DEBOUNCE_INTERVAL = 500; // ms
 
   window.util = {
     generateRandomRGB: generateRandomRGB,
     getRandomIndex: getRandomIndex,
     isEscEvent: isEscEvent,
-    isEnterEvent: isEnterEvent
+    isEnterEvent: isEnterEvent,
+    debounce: debounce
   };
 
   function generateRandomRGB() {
@@ -31,5 +33,19 @@
     if (evt.keyCode === ENTER_KEYCODE) {
       action();
     }
+  }
+
+  function debounce(fun) {
+    var lastTimeout = null;
+
+    return function () {
+      var args = arguments;
+      if (lastTimeout) {
+        window.clearTimeout(lastTimeout);
+      }
+      lastTimeout = window.setTimeout(function () {
+        fun.apply(null, args);
+      }, DEBOUNCE_INTERVAL);
+    };
   }
 })();
